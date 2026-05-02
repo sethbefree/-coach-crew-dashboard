@@ -17,6 +17,7 @@
     }
     body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
+```
 .topbar { border-bottom: 1px solid var(--border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
 .logo { display: flex; align-items: center; gap: 16px; }
 .logo-icon { width: 28px; height: 28px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; }
@@ -47,8 +48,9 @@ h1 { font-size: 42px; font-weight: 400; letter-spacing: -1px; color: var(--text)
 
 .empty { border: 1px solid var(--border); padding: 60px; text-align: center; font-size: 9px; letter-spacing: 4px; color: var(--muted); font-family: monospace; }
 
-.detail-wrap { display: flex; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.detail-wrap { display: flex; gap: 1px; background: var(--border); border: 1px solid var(--border); align-items: flex-start; }
 .panel { background: var(--bg); flex: 1; min-width: 0; }
+.panel-name { background: var(--bg); flex: 1; min-width: 0; position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
 .panel-header { padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 .panel-title { font-size: 9px; letter-spacing: 3px; color: var(--accent); font-family: monospace; }
 .panel-sub { font-size: 9px; letter-spacing: 2px; color: var(--muted); font-family: monospace; }
@@ -90,11 +92,13 @@ h1 { font-size: 42px; font-weight: 400; letter-spacing: -1px; color: var(--text)
       </div>
     </div>
 
+```
 <div id="date-grid" class="date-grid">
   <div class="loading">LOADING CREW DATA...</div>
 </div>
 
 <div id="detail-area"></div>
+```
 
   </div>
 
@@ -165,7 +169,7 @@ h1 { font-size: 42px; font-weight: 400; letter-spacing: -1px; color: var(--text)
       // Name Panel
       if (selectedPart && info.groups[selectedPart]) {
         const names = info.groups[selectedPart];
-        html += '<div class="panel"><div class="panel-header"><span class="panel-title">' + selectedPart + '</span><span class="panel-sub">' + names.length + ' CREW</span></div>';
+        html += '<div class="panel-name"><div class="panel-header"><span class="panel-title">' + selectedPart + '</span><span class="panel-sub">' + names.length + ' CREW</span></div>';
         names.forEach(function(person, i) {
           html += '<div class="name-row"><span class="name-num">' + String(i+1).padStart(2,'0') + '</span><span class="name-text">' + person.name + '</span></div>';
         });
