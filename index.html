@@ -110,7 +110,7 @@ h1 { font-size: 42px; font-weight: 400; letter-spacing: -1px; color: var(--text)
 
     async function loadData() {
       try {
-        const res = await fetch(API_URL);
+        const res = await fetch(API_URL + '?t=' + Date.now());
         crewData = await res.json();
         renderDates();
         renderDetail();
