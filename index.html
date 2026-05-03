@@ -17,6 +17,7 @@
     }
     body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
+```
 .topbar { border-bottom: 1px solid var(--border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
 .logo { display: flex; align-items: center; gap: 16px; }
 .logo-icon { width: 28px; height: 28px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; }
@@ -73,18 +74,13 @@ h1 { font-size: 42px; font-weight: 400; letter-spacing: -1px; color: var(--text)
 
   </style>
 </head>
+<body>
   <div class="topbar">
     <div class="logo">
       <div class="logo-icon"><div class="logo-dot"></div></div>
       <span class="logo-text">COACH</span>
     </div>
-    <div style="display:flex;align-items:center;gap:16px">
-      <a href="https://10days-six.vercel.app" target="_blank" rel="noopener"
-        style="font-size:10px;letter-spacing:3px;color:#C8A96E;font-family:monospace;text-decoration:none;border:1px solid #C8A96E;padding:4px 12px;">
-        WEATHER →
-      </a>
-      <span class="topbar-right">PRODUCTION DASHBOARD — 2026</span>
-    </div>
+    <span class="topbar-right">PRODUCTION DASHBOARD — 2026</span>
   </div>
 
   <div class="main">
@@ -115,7 +111,7 @@ h1 { font-size: 42px; font-weight: 400; letter-spacing: -1px; color: var(--text)
 
     async function loadData() {
       try {
-        const res = await fetch(API_URL + '?t=' + Date.now());
+        const res = await fetch(API_URL);
         crewData = await res.json();
         renderDates();
         renderDetail();
@@ -190,6 +186,38 @@ h1 { font-size: 42px; font-weight: 400; letter-spacing: -1px; color: var(--text)
     }
 
     loadData();
+
+    // Pull to refresh
+    let startY = 0;
+    let isPulling = false;
+    const threshold = 80;
+
+    document.addEventListener('touchstart', function(e) {
+      if (window.scrollY === 0) {
+        startY = e.touches[0].clientY;
+        isPulling = true;
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function(e) {
+      if (!isPulling) return;
+      const diff = e.touches[0].clientY - startY;
+      if (diff > 10 && window.scrollY === 0) {
+        document.body.style.transform = 'translateY(' + Math.min(diff * 0.4, 40) + 'px)';
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+      if (!isPulling) return;
+      const diff = e.changedTouches[0].clientY - startY;
+      document.body.style.transform = '';
+      document.body.style.transition = 'transform 0.3s';
+      setTimeout(function() { document.body.style.transition = ''; }, 300);
+      if (diff > threshold && window.scrollY === 0) {
+        loadData();
+      }
+      isPulling = false;
+    }, { passive: true });
   </script>
 
 </body>
