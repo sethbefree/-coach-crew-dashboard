@@ -17,12 +17,13 @@
     }
     body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-.topbar { border-bottom: 1px solid var(--border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
-.logo { display: flex; align-items: center; gap: 16px; }
-.logo-icon { width: 28px; height: 28px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; }
-.logo-dot { width: 10px; height: 10px; background: var(--accent); }
-.logo-text { font-size: 11px; letter-spacing: 5px; font-family: monospace; color: var(--text); }
-.topbar-right { font-size: 10px; letter-spacing: 3px; color: var(--muted); font-family: monospace; }
+```
+.topbar { border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo-icon { width: 24px; height: 24px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo-dot { width: 8px; height: 8px; background: var(--accent); }
+.logo-text { font-size: 10px; letter-spacing: 4px; font-family: monospace; color: var(--text); white-space: nowrap; }
+.topbar-right { font-size: 9px; letter-spacing: 2px; color: var(--muted); font-family: monospace; white-space: nowrap; }
 
 .main { padding: 40px; }
 .title-section { margin-bottom: 48px; }
@@ -82,7 +83,7 @@ h1 { font-size: 42px; font-weight: 400; letter-spacing: -1px; color: var(--text)
     <div style="display:flex;align-items:center;gap:16px">
       <span class="topbar-right">PRODUCTION DASHBOARD — 2026</span>
       <a href="https://10days-six.vercel.app" target="_blank" rel="noopener"
-        style="font-size:10px;letter-spacing:3px;color:#C8A96E;font-family:monospace;text-decoration:none;border:1px solid #C8A96E;padding:4px 12px;">
+        style="font-size:9px;letter-spacing:2px;color:#C8A96E;font-family:monospace;text-decoration:none;border:1px solid #C8A96E;padding:4px 10px;white-space:nowrap;flex-shrink:0;">
         WEATHER →
       </a>
     </div>
